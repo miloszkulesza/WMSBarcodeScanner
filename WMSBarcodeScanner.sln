@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMSBarcodeScanner.Android", "WMSBarcodeScanner\WMSBarcodeScanner.Android\WMSBarcodeScanner.Android.csproj", "{3D9C2A04-35C9-4903-B503-87C1FBC5750F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMSBarcodeScanner", "WMSBarcodeScanner\WMSBarcodeScanner\WMSBarcodeScanner.csproj", "{4619C82D-F1D8-4EBA-BC7E-9D92D477A93B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D9C2A04-35C9-4903-B503-87C1FBC5750F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D9C2A04-35C9-4903-B503-87C1FBC5750F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D9C2A04-35C9-4903-B503-87C1FBC5750F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3D9C2A04-35C9-4903-B503-87C1FBC5750F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D9C2A04-35C9-4903-B503-87C1FBC5750F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D9C2A04-35C9-4903-B503-87C1FBC5750F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4619C82D-F1D8-4EBA-BC7E-9D92D477A93B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4619C82D-F1D8-4EBA-BC7E-9D92D477A93B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4619C82D-F1D8-4EBA-BC7E-9D92D477A93B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4619C82D-F1D8-4EBA-BC7E-9D92D477A93B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4619C82D-F1D8-4EBA-BC7E-9D92D477A93B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4619C82D-F1D8-4EBA-BC7E-9D92D477A93B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB8D8713-1B2B-4440-AAA7-DA8C3ED281D7}
+	EndGlobalSection
+EndGlobal
