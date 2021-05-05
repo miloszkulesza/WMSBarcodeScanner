@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WMSBarcodeScanner.Consts;
 
 namespace WMSBarcodeScanner.ViewModels
 {
@@ -8,7 +9,7 @@ namespace WMSBarcodeScanner.ViewModels
     {
         public SettingsPageViewModel()
         {
-            Title = "Ustawienia";
+            Title = ViewTitles.SettingsPage;
         }
     }
 }

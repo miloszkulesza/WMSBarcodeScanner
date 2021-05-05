@@ -5,15 +5,17 @@
              xmlns:vm="clr-namespace:WMSBarcodeScanner.ViewModels"
              Title="{Binding Title}">
 
-    <ContentPage.BindingContext>
-        <vm:ReceiptPageViewModel />
-    </ContentPage.BindingContext>
-    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Skanuj"
+                     Command="{Binding ScanCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Naciśnij przycisk Skanuj aby zeskanować kod kreskowy produktu przyjmowanego na magazyn"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand"
+                   Margin="5"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -11,9 +11,11 @@ namespace WMSBarcodeScanner
 
         public App()
         {
-            InitializeComponent();
-
             DependencyService.Register<MockDataStore>();
+            DependencyService.Register<IAlertService, AlertService>();
+
+            InitializeComponent();
+            
             MainPage = new AppShell();
         }
 

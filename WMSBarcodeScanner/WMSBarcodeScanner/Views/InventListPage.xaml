@@ -10,7 +10,7 @@
     </ContentPage.BindingContext>
     
     <ListView x:Name="MyListView"
-            ItemsSource="{Binding Items}"
+            ItemsSource="{Binding DataStore}"
             ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement">
     <!--Built in Cells-->
