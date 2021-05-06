@@ -1,44 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using WMSBarcodeScanner.Consts;
-using WMSBarcodeScanner.Services;
+using WMSBarcodeScanner.Views;
 using Xamarin.Forms;
 using ZXing;
-using ZXing.Net.Mobile.Forms;
 
 namespace WMSBarcodeScanner.ViewModels
 {
     public class PickPageViewModel : BaseViewModel
     {
-        public Page Page { get; }
-        public ZXingScannerPage ScanPage { get; set; }
-        public IAlertService alertService { get; } = DependencyService.Get<IAlertService>();
-        public ICommand ScanCommand { get { return new Command(async () => await OnScan(), () => true); } }
+        public Page Page { get; set; }
+
+        private Result scannedBarcode;
+        public Result ScannedBarcode
+        {
+            get { return scannedBarcode; }
+            set { SetProperty(ref scannedBarcode, value); }
+        }
+
+        private bool isScanning;
+        public bool IsScanning
+        {
+            get { return isScanning; }
+            set { SetProperty(ref isScanning, value); }
+        }
+
+        private bool isAnalyzing;
+        public bool IsAnalyzing
+        {
+            get { return isAnalyzing; }
+            set { SetProperty(ref isAnalyzing, value); }
+        }
+
+        public ICommand QRScanResultCommand { get; set; }
 
         public PickPageViewModel(Page page)
         {
             Page = page;
-            Title = ViewTitles.PickPage;
+            IsScanning = true;
+            Page.Appearing += OnPageAppearing;
+            Title = ViewTitles.PickScanningPage;
+            QRScanResultCommand = new Command(() => OnQRScanResult());
         }
 
-        private async Task OnScan()
+        private void OnPageAppearing(object sender, System.EventArgs e)
         {
-            ScanPage = new ZXingScannerPage();
-            ScanPage.OnScanResult += OnScannedResult;
-            await Page.Navigation.PushAsync(ScanPage);
+            IsAnalyzing = true;
         }
 
-        private void OnScannedResult(Result result)
+        private void OnQRScanResult()
         {
-            ScanPage.IsScanning = false;
+            IsAnalyzing = false;
 
             Device.BeginInvokeOnMainThread(async () =>
             {
-                await Page.Navigation.PopAsync();
-                await alertService.ShowAsync("Scanned Barcode", result.Text, "OK");
+                await Page.Navigation.PushAsync(new ScannedBarcodePickPage(ScannedBarcode.Text));
             });
         }
     }
