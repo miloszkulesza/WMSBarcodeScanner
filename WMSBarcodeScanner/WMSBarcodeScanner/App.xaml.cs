@@ -11,7 +11,7 @@ namespace WMSBarcodeScanner
 
         public App()
         {
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<InventoryMockRepository>();
             DependencyService.Register<IAlertService, AlertService>();
 
             InitializeComponent();

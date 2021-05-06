@@ -8,32 +8,80 @@
     <ContentPage.BindingContext>
         <vm:InventListPageViewModel />
     </ContentPage.BindingContext>
+
+    <Shell.TitleView>
+        <Editor Text="{Binding SearchText}"
+                PlaceholderColor="White"
+                TextColor="White"
+                Placeholder="Szukaj..."/>
+    </Shell.TitleView>
     
     <ListView x:Name="MyListView"
-            ItemsSource="{Binding DataStore}"
-            ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement">
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding .}" />
-        </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
-  </ListView>
+            ItemsSource="{Binding InventoryList}"
+            CachingStrategy="RecycleElement"
+              SelectionMode="None">
+
+        <ListView.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Kod kreskowy"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Grid.Column="0"
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       Margin="5"
+                       TextColor="Black"/>
+                <Label Text="Nazwa"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Grid.Column="1"
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       Margin="5"
+                       TextColor="Black"/>
+                <Label Text="Ilość"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Grid.Column="2"
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       Margin="5"
+                       TextColor="Black"/>
+            </Grid>
+        </ListView.Header>
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding Barcode}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Grid.Column="0"
+                               Margin="5"/>
+                        <Label Text="{Binding Name}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Grid.Column="1"
+                               Margin="5"/>
+                        <Label Text="{Binding Quantity}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Grid.Column="2"
+                               Margin="5"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>
