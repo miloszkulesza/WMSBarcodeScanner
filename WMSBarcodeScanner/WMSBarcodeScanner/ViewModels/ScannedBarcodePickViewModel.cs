@@ -9,13 +9,15 @@ namespace WMSBarcodeScanner.ViewModels
         public string Barcode
         {
             get { return barcode; }
-            set { SetProperty(ref barcode, value); }
+            set 
+            { 
+                SetProperty(ref barcode, value);
+                Title = $"{ViewTitles.PickPage} - {Barcode}";
+            }
         }
 
-        public ScannedBarcodePickViewModel(string barcode)
+        public ScannedBarcodePickViewModel()
         {
-            Barcode = barcode;
-            Title = $"{ViewTitles.PickPage} - {Barcode}";
         }
     }
 }

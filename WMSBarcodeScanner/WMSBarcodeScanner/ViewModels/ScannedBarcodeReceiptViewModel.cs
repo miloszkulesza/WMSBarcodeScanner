@@ -9,13 +9,16 @@ namespace WMSBarcodeScanner.ViewModels
         public string Barcode
         {
             get { return barcode; }
-            set { SetProperty(ref barcode, value); }
+            set 
+            { 
+                SetProperty(ref barcode, value);
+                Title = $"{ViewTitles.ReceiptPage} - {Barcode}";
+            }
         }
 
-        public ScannedBarcodeReceiptViewModel(string barcode)
+        public ScannedBarcodeReceiptViewModel()
         {
-            Barcode = barcode;
-            Title = $"{ViewTitles.ReceiptPage} - {Barcode}";
+
         }
     }
 }

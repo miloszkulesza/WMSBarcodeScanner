@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WMSBarcodeScanner.ViewModels;
+﻿using WMSBarcodeScanner.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +10,7 @@ namespace WMSBarcodeScanner.Views
         public ReceiptPage()
         {
             InitializeComponent();
-            BindingContext = new ReceiptPageViewModel(this);
+            (BindingContext as ReceiptViewModel).Page = this;
         }
     }
 }

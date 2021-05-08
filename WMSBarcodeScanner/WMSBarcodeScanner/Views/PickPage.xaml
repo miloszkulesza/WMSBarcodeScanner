@@ -5,6 +5,9 @@
              xmlns:vm="clr-namespace:WMSBarcodeScanner.ViewModels"
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <vm:PickViewModel />
+    </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" 

@@ -6,9 +6,20 @@ using ZXing;
 
 namespace WMSBarcodeScanner.ViewModels
 {
-    public class PickPageViewModel : BaseViewModel
+    public class ReceiptViewModel : BaseViewModel
     {
-        public Page Page { get; set; }
+        #region properties
+        private Page page;
+        public Page Page
+        {
+            get { return page; }
+            set 
+            { 
+                page = value;
+                page.Appearing += OnPageAppearing;
+            }
+        }
+
 
         private Result scannedBarcode;
         public Result ScannedBarcode
@@ -30,18 +41,22 @@ namespace WMSBarcodeScanner.ViewModels
             get { return isAnalyzing; }
             set { SetProperty(ref isAnalyzing, value); }
         }
+        #endregion
 
+        #region commands
         public ICommand QRScanResultCommand { get; set; }
+        #endregion
 
-        public PickPageViewModel(Page page)
+        #region construct
+        public ReceiptViewModel()
         {
-            Page = page;
-            IsScanning = true;
-            Page.Appearing += OnPageAppearing;
-            Title = ViewTitles.PickScanningPage;
-            QRScanResultCommand = new Command(() => OnQRScanResult());
+            IsScanning = true;            
+            Title = ViewTitles.ReceiptScanningPage;
+            QRScanResultCommand = new Command(() => OnQRScanResult());            
         }
+        #endregion
 
+        #region private methods
         private void OnPageAppearing(object sender, System.EventArgs e)
         {
             IsAnalyzing = true;
@@ -53,8 +68,9 @@ namespace WMSBarcodeScanner.ViewModels
 
             Device.BeginInvokeOnMainThread(async () =>
             {
-                await Page.Navigation.PushAsync(new ScannedBarcodePickPage(ScannedBarcode.Text));
+                await Page.Navigation.PushAsync(new ScannedBarcodeReceiptPage(ScannedBarcode.Text));
             });
         }
+        #endregion
     }
 }

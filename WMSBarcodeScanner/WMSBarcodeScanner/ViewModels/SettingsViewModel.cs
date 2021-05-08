@@ -5,9 +5,9 @@ using WMSBarcodeScanner.Consts;
 
 namespace WMSBarcodeScanner.ViewModels
 {
-    public class SettingsPageViewModel : BaseViewModel
+    public class SettingsViewModel : BaseViewModel
     {
-        public SettingsPageViewModel()
+        public SettingsViewModel()
         {
             Title = ViewTitles.SettingsPage;
         }

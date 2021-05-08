@@ -88,7 +88,7 @@ namespace WMSBarcodeScanner.Services
 
         public async Task<IEnumerable<Inventory>> SearchForInventory(string searchText)
         {
-            List<Inventory> inventoryList = Inventory.Where(arg => arg.Barcode.ToUpper() == searchText.ToUpper()).ToList();
+            List<Inventory> inventoryList = Inventory.Where(arg => arg.Barcode.ToUpper().Contains(searchText.ToUpper())).ToList();
 
             if (inventoryList.Count == 0)
                 inventoryList = Inventory.Where(arg => arg.Name.ToUpper().Contains(searchText.ToUpper())).ToList();

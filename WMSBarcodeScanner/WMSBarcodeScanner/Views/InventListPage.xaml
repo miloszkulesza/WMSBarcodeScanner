@@ -4,11 +4,10 @@
              x:Class="WMSBarcodeScanner.Views.InventListPage"
              xmlns:vm="clr-namespace:WMSBarcodeScanner.ViewModels"
              Title="{Binding Title}">
-
     <ContentPage.BindingContext>
-        <vm:InventListPageViewModel />
+        <vm:InventListViewModel />
     </ContentPage.BindingContext>
-
+    
     <Shell.TitleView>
         <Editor Text="{Binding SearchText}"
                 PlaceholderColor="White"
@@ -18,7 +17,8 @@
     
     <ListView ItemsSource="{Binding InventoryList}"
               CachingStrategy="RecycleElement"
-              SelectionMode="None">
+              SelectionMode="Single"
+              SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
 
         <ListView.Header>
             <Grid>
@@ -57,6 +57,14 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Edytuj"
+                                  Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InventListViewModel}}, Path=EditInventoryCommand}"
+                                  CommandParameter="{Binding .}"
+                                  IsDestructive="True"/>
+                        <MenuItem Text="Usuń" />
+                    </ViewCell.ContextActions>
+                    
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
