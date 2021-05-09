@@ -56,7 +56,7 @@ namespace WMSBarcodeScanner.Services
 
         public async Task<bool> UpdateInventoryAsync(Inventory inventory)
         {
-            var oldInventory = Inventory.Where((Inventory arg) => arg.Id == inventory.Id).FirstOrDefault();
+            var oldInventory = Inventory.Where((arg) => arg.Id == inventory.Id).FirstOrDefault();
             Inventory.Remove(oldInventory);
             Inventory.Add(inventory);
 
@@ -65,7 +65,7 @@ namespace WMSBarcodeScanner.Services
 
         public async Task<bool> DeleteInventoryAsync(string id)
         {
-            var oldInventory = Inventory.Where((Inventory arg) => arg.Id == id).FirstOrDefault();
+            var oldInventory = Inventory.Where((arg) => arg.Id == id).FirstOrDefault();
             Inventory.Remove(oldInventory);
 
             return await Task.FromResult(true);

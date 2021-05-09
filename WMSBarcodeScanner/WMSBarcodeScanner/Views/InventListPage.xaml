@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WMSBarcodeScanner.Views.InventListPage"
              xmlns:vm="clr-namespace:WMSBarcodeScanner.ViewModels"
+             x:Name="InventListPageView"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:InventListViewModel />
@@ -59,10 +60,12 @@
                 <ViewCell>
                     <ViewCell.ContextActions>
                         <MenuItem Text="Edytuj"
-                                  Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InventListViewModel}}, Path=EditInventoryCommand}"
+                                  Command="{Binding Path=BindingContext.EditInventoryCommand, Source={x:Reference InventListPageView}}"
+                                  CommandParameter="{Binding .}" />
+                        <MenuItem Text="Usuń"
+                                  Command="{Binding Path=BindingContext.RemoveInventoryCommand, Source={x:Reference InventListPageView}}"
                                   CommandParameter="{Binding .}"
-                                  IsDestructive="True"/>
-                        <MenuItem Text="Usuń" />
+                                  IsDestructive="True" />
                     </ViewCell.ContextActions>
                     
                     <Grid>

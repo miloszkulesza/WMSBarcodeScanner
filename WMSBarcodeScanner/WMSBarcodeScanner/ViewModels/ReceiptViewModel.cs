@@ -44,7 +44,13 @@ namespace WMSBarcodeScanner.ViewModels
         #endregion
 
         #region commands
-        public ICommand QRScanResultCommand { get; set; }
+        public ICommand QRScanResultCommand
+        {
+            get
+            {
+                return new Command(() => OnQRScanResult());
+            }
+        }
         #endregion
 
         #region construct
@@ -52,7 +58,6 @@ namespace WMSBarcodeScanner.ViewModels
         {
             IsScanning = true;            
             Title = ViewTitles.ReceiptScanningPage;
-            QRScanResultCommand = new Command(() => OnQRScanResult());            
         }
         #endregion
 

@@ -12,7 +12,7 @@ namespace WMSBarcodeScanner.ViewModels
             set 
             { 
                 SetProperty(ref inventory, value);
-                Title = inventory.Name;
+                Title = inventory.ToString();
             }
         }
 

@@ -7,12 +7,74 @@
     <ContentPage.BindingContext>
         <vm:InventDetailsViewModel />
     </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Label}"
+                   x:Key="HeaderLabel">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+
+            <Style TargetType="{x:Type Label}"
+                   x:Key="ValueLabel">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Inventory.Name}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Label Grid.Row="0"
+                       Text="Producent"
+                       Style="{StaticResource HeaderLabel}" />
+                <Label Grid.Row="1" 
+                       Text="Opis"
+                       Style="{StaticResource HeaderLabel}" />
+                <Label Grid.Row="2" 
+                       Text="Kod kreskowy"
+                       Style="{StaticResource HeaderLabel}" />
+                <Label Grid.Row="3" 
+                       Text="Ilość"
+                       Style="{StaticResource HeaderLabel}" />
+                <Label Grid.Row="4" 
+                       Text="Jednostka"
+                       Style="{StaticResource HeaderLabel}" />
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Label Grid.Row="0" 
+                       Text="{Binding Inventory.Manufacturer}"
+                       Style="{StaticResource ValueLabel}" />
+                <Label Grid.Row="1" 
+                       Text="{Binding Inventory.Description}"
+                       Style="{StaticResource ValueLabel}" />
+                <Label Grid.Row="2" 
+                       Text="{Binding Inventory.Barcode}"
+                       Style="{StaticResource ValueLabel}" />
+                <Label Grid.Row="3" 
+                       Text="{Binding Inventory.Quantity}"
+                       Style="{StaticResource ValueLabel}" />
+                <Label Grid.Row="4" 
+                       Text="{Binding Inventory.PackageUnit}"
+                       Style="{StaticResource ValueLabel}" />
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
