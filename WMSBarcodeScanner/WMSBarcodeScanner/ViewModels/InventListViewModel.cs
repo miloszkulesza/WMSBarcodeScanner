@@ -177,7 +177,7 @@ namespace WMSBarcodeScanner.ViewModels
                 await Page.Navigation.PopAsync();
                 var searchedInventory = await inventoryRepo.SearchByBarcode(result.Text);
                 if (searchedInventory.Count() == 0)
-                    await alertService.ShowAsync("Szukaj po barcode", $"Nie znaleziono zeskanowanego towaru o kodzie kreskowym {result.Text}", "Zamknij");
+                    await alertService.ShowAsync("Nie znaleziono towaru", $"Nie znaleziono zeskanowanego towaru o kodzie kreskowym {result.Text}", "Zamknij");
                 else
                 {
                     InventoryList = new ObservableCollection<Inventory>(searchedInventory);
