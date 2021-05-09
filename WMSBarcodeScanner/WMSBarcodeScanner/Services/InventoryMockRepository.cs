@@ -95,5 +95,12 @@ namespace WMSBarcodeScanner.Services
 
             return await Task.FromResult(inventoryList);
         }
+
+        public async Task<IEnumerable<Inventory>> SearchByBarcode(string barcode)
+        {
+            List<Inventory> inventoryList = Inventory.Where(arg => arg.Barcode == barcode).ToList();
+
+            return await Task.FromResult(inventoryList);
+        }
     }
 }

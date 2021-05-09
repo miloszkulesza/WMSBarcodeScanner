@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -7,6 +8,8 @@ using WMSBarcodeScanner.Models;
 using WMSBarcodeScanner.Services;
 using WMSBarcodeScanner.Views;
 using Xamarin.Forms;
+using ZXing;
+using ZXing.Net.Mobile.Forms;
 
 namespace WMSBarcodeScanner.ViewModels
 {
@@ -18,7 +21,12 @@ namespace WMSBarcodeScanner.ViewModels
         #endregion
 
         #region properties
-        public Page Page { get; set; }
+        private Page page;
+        public Page Page
+        {
+            get { return page; }
+            set { SetProperty(ref page, value); }
+        }
 
         private ObservableCollection<Inventory> inventoryList;
         public ObservableCollection<Inventory> InventoryList
@@ -48,6 +56,24 @@ namespace WMSBarcodeScanner.ViewModels
                 OnSelectedItemChanged();
             }
         }
+
+        private bool resetList;
+
+        public bool ResetList
+        {
+            get { return resetList; }
+            set { SetProperty(ref resetList, value); }
+        }
+
+        private ZXingScannerPage scannerPage;
+
+        public ZXingScannerPage ScannerPage
+        {
+            get { return scannerPage; }
+            set { SetProperty(ref scannerPage, value); }
+        }
+
+
         #endregion
 
         #region commands
@@ -66,6 +92,22 @@ namespace WMSBarcodeScanner.ViewModels
                 return new Command(async (param) => await OnRemoveInventory(param));
             }
         }
+
+        public ICommand SearchByBarcodeCommand
+        {
+            get
+            {
+                return new Command(() => OnSearchByBarcode());
+            }
+        }
+
+        public ICommand RefreshListCommand
+        {
+            get
+            {
+                return new Command(async () => await OnResetList());
+            }
+        }
         #endregion
 
         #region construct
@@ -73,6 +115,7 @@ namespace WMSBarcodeScanner.ViewModels
         {
             Title = ViewTitles.InventListPage;
             InventoryList = new ObservableCollection<Inventory>(inventoryRepo.GetInventoryAsync().Result);
+            ResetList = false;
         }
         #endregion
 
@@ -108,6 +151,45 @@ namespace WMSBarcodeScanner.ViewModels
                 InventoryList.Remove(InventoryList.FirstOrDefault(x => x.Id == (param as Inventory).Id));
                 await alertService.ShowAsync("Usuwanie towaru", $"Usunięto towar {(param as Inventory).Name}", "Zamknij");
             }
+        }
+
+        private void OnSearchByBarcode()
+        {
+            if (ScannerPage == null)
+            {
+                ScannerPage = new ZXingScannerPage();
+                ScannerPage.Title = ViewTitles.SearchByBarcodeScanningPage;
+                ScannerPage.IsScanning = true;
+                ScannerPage.IsAnalyzing = true;
+                ScannerPage.OnScanResult += OnSearchScannedBarcode;
+            }
+            else
+                ScannerPage.IsAnalyzing = true;
+            
+            Device.BeginInvokeOnMainThread(async () => await Page.Navigation.PushAsync(ScannerPage));      
+        }
+
+        private void OnSearchScannedBarcode(Result result)
+        {
+            ScannerPage.IsAnalyzing = false;
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await Page.Navigation.PopAsync();
+                var searchedInventory = await inventoryRepo.SearchByBarcode(result.Text);
+                if (searchedInventory.Count() == 0)
+                    await alertService.ShowAsync("Szukaj po barcode", $"Nie znaleziono zeskanowanego towaru o kodzie kreskowym {result.Text}", "Zamknij");
+                else
+                {
+                    InventoryList = new ObservableCollection<Inventory>(searchedInventory);
+                    ResetList = true;
+                }
+            });
+        }
+
+        private async Task OnResetList()
+        {
+            InventoryList = new ObservableCollection<Inventory>(await inventoryRepo.GetInventoryAsync());
+            ResetList = false;
         }
         #endregion
     }

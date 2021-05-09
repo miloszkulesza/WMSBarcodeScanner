@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using WMSBarcodeScanner.Models;
 
@@ -14,5 +13,6 @@ namespace WMSBarcodeScanner.Services
         Task<IEnumerable<Inventory>> GetInventoryAsync(bool forceRefresh = false);
         Task<Inventory> GetInventoryByBarcodeAsync(string barcode);
         Task<IEnumerable<Inventory>> SearchForInventory(string searchText);
+        Task<IEnumerable<Inventory>> SearchByBarcode(string barcode);
     }
 }

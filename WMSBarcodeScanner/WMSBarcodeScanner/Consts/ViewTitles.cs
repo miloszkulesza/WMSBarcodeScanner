@@ -12,5 +12,6 @@ namespace WMSBarcodeScanner.Consts
         public static readonly string SettingsPage = "Ustawienia";
         public static readonly string ReceiptScanningPage = "Przyjęcia - skanowanie";
         public static readonly string PickScanningPage = "Pobrania - skanowanie";
+        public static readonly string SearchByBarcodeScanningPage = "Szukaj - skanowanie";
     }
 }

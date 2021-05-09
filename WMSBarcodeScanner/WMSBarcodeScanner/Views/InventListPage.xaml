@@ -8,12 +8,44 @@
     <ContentPage.BindingContext>
         <vm:InventListViewModel />
     </ContentPage.BindingContext>
-    
+
     <Shell.TitleView>
-        <Editor Text="{Binding SearchText}"
-                PlaceholderColor="White"
-                TextColor="White"                
-                Placeholder="Szukaj..."/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <Editor Grid.Column="0" 
+                    Text="{Binding SearchText}"
+                    PlaceholderColor="White"
+                    TextColor="White"                
+                    Placeholder="Szukaj..." />
+            <Button Grid.Column="1" 
+                    ImageSource="scan_barcode"
+                    WidthRequest="35"
+                    Margin="5"
+                    Command="{Binding SearchByBarcodeCommand}" />
+            <Button Grid.Column="2"
+                    ImageSource="refresh"
+                    WidthRequest="35"
+                    Margin="5"
+                    Command="{Binding RefreshListCommand}">
+                <Button.Triggers>
+                    <DataTrigger TargetType="{x:Type Button}"
+                                 Binding="{Binding ResetList}"
+                                 Value="True">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="{x:Type Button}"
+                                 Binding="{Binding ResetList}"
+                                 Value="False">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+        </Grid>        
     </Shell.TitleView>
     
     <ListView ItemsSource="{Binding InventoryList}"
