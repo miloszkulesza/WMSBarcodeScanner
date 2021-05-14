@@ -4,18 +4,87 @@
              x:Class="WMSBarcodeScanner.Views.InventEditPage"
              xmlns:vm="clr-namespace:WMSBarcodeScanner.ViewModels"
              Title="{Binding Title}">
+    
     <ContentPage.BindingContext>
         <vm:InventEditViewModel />
     </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Zapisz"
+                     Command="{Binding SaveInventoryCommand}" />
+    </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Inventory.Name}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Label Text="edycja"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label  Grid.Row="0"
+                    Grid.Column="0"
+                    Text="Kod kreskowy"
+                    VerticalOptions="Center" />
+            <Editor Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding Inventory.Barcode}"
+                    IsEnabled="False"
+                    VerticalOptions="Center" />
+
+            <Label  Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Nazwa"
+                    VerticalOptions="Center" />
+            <Editor Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding Inventory.Name}"
+                    VerticalOptions="Center" />
+
+            <Label  Grid.Row="2"
+                    Grid.Column="0"
+                    Text="Producent"
+                    VerticalOptions="Center" />
+            <Editor Grid.Row="2"
+                    Grid.Column="1"
+                    Text="{Binding Inventory.Manufacturer}"
+                    VerticalOptions="Center" />
+
+            <Label  Grid.Row="3"
+                    Grid.Column="0"
+                    Text="Opis"
+                    VerticalOptions="Center" />
+            <Editor Grid.Row="3"
+                    Grid.Column="1"
+                    Text="{Binding Inventory.Description}"
+                    VerticalOptions="Center" />
+
+            <Label  Grid.Row="4"
+                    Grid.Column="0"
+                    Text="Ilość"
+                    VerticalOptions="Center" />
+            <Editor Grid.Row="4"
+                    Grid.Column="1"
+                    Text="{Binding Inventory.Quantity}"
+                    IsEnabled="False"
+                    VerticalOptions="Center" />
+
+            <Label  Grid.Row="5"
+                    Grid.Column="0"
+                    Text="Jednostka"
+                    VerticalOptions="Center" />
+            <Editor Grid.Row="5"
+                    Grid.Column="1"
+                    Text="{Binding Inventory.PackageUnit}"
+                    VerticalOptions="Center" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

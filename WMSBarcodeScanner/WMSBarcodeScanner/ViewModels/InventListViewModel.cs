@@ -139,10 +139,11 @@ namespace WMSBarcodeScanner.ViewModels
         {
             if (param is Inventory)
             {
-                var editPage = new InventEditPage(param as Inventory);
+                var editPage = new InventEditPage(param as Inventory, this);
                 await Page.Navigation.PushAsync(editPage);
-            }            
+            }
         }
+
         private async Task OnRemoveInventory(object param)
         {
             if (param is Inventory)

@@ -8,10 +8,13 @@ namespace WMSBarcodeScanner.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class InventEditPage : ContentPage
     {
-        public InventEditPage(Inventory inventory)
+        public InventEditPage(Inventory inventory,
+                              InventListViewModel viewModel)
         {
             InitializeComponent();
             (BindingContext as InventEditViewModel).Inventory = inventory;
+            (BindingContext as InventEditViewModel).Page = this;
+            (BindingContext as InventEditViewModel).InventListViewModel = viewModel;
         }
     }
 }
