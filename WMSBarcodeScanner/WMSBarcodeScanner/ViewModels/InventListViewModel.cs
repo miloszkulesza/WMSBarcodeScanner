@@ -21,13 +21,6 @@ namespace WMSBarcodeScanner.ViewModels
         #endregion
 
         #region properties
-        private Page page;
-        public Page Page
-        {
-            get { return page; }
-            set { SetProperty(ref page, value); }
-        }
-
         private ObservableCollection<Inventory> inventoryList;
         public ObservableCollection<Inventory> InventoryList
         {

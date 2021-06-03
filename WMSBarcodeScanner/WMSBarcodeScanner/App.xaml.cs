@@ -1,8 +1,6 @@
-﻿using System;
-using WMSBarcodeScanner.Services;
+﻿using WMSBarcodeScanner.Services;
 using WMSBarcodeScanner.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace WMSBarcodeScanner
 {
@@ -16,7 +14,7 @@ namespace WMSBarcodeScanner
 
             InitializeComponent();
             
-            MainPage = new AppShell();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()

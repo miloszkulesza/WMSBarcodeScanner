@@ -9,19 +9,6 @@ namespace WMSBarcodeScanner.ViewModels
     public class PickViewModel : BaseViewModel
     {
         #region properties
-        private Page page;
-
-        public Page Page
-        {
-            get { return page; }
-            set 
-            { 
-                page = value;
-                page.Appearing += OnPageAppearing;
-            }
-        }
-
-
         private Result scannedBarcode;
         public Result ScannedBarcode
         {
@@ -53,6 +40,7 @@ namespace WMSBarcodeScanner.ViewModels
         {
             IsScanning = true;            
             Title = ViewTitles.PickScanningPage;
+            Page.Appearing += OnPageAppearing;
             QRScanResultCommand = new Command(() => OnQRScanResult());
         }
         #endregion

@@ -10,7 +10,7 @@ namespace WMSBarcodeScanner.Views
         public PickPage()
         {
             InitializeComponent();
-            (BindingContext as PickViewModel).Page = this;
+            (BindingContext as BaseViewModel).Page = this;
         }
     }
 }

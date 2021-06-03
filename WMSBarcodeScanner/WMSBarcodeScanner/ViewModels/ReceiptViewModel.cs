@@ -9,18 +9,6 @@ namespace WMSBarcodeScanner.ViewModels
     public class ReceiptViewModel : BaseViewModel
     {
         #region properties
-        private Page page;
-        public Page Page
-        {
-            get { return page; }
-            set 
-            { 
-                page = value;
-                page.Appearing += OnPageAppearing;
-            }
-        }
-
-
         private Result scannedBarcode;
         public Result ScannedBarcode
         {
@@ -58,6 +46,7 @@ namespace WMSBarcodeScanner.ViewModels
         {
             IsScanning = true;            
             Title = ViewTitles.ReceiptScanningPage;
+            Page.Appearing += OnPageAppearing;
         }
         #endregion
 

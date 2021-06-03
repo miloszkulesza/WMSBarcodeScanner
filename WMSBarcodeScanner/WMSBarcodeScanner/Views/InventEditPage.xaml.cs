@@ -13,7 +13,7 @@ namespace WMSBarcodeScanner.Views
         {
             InitializeComponent();
             (BindingContext as InventEditViewModel).Inventory = inventory;
-            (BindingContext as InventEditViewModel).Page = this;
+            (BindingContext as BaseViewModel).Page = this;
             (BindingContext as InventEditViewModel).InventListViewModel = viewModel;
         }
     }

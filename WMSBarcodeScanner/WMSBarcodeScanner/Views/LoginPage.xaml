@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WMSBarcodeScanner.Views.LoginPage"
+             xmlns:vm="clr-namespace:WMSBarcodeScanner.ViewModels"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="28" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+            
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="BackgroundColor" Value="LightGreen" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+
+            <Style TargetType="{x:Type Entry}">
+                <Setter Property="Margin" Value="5" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Logowanie" />
+            <Entry Placeholder="Email"
+                   Text="{Binding Email}" />
+            <Entry Placeholder="Hasło"
+                   Text="{Binding Password}"
+                   IsPassword="True" />
+            <Button Text="Zaloguj się"
+                    Command="{Binding LoginCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

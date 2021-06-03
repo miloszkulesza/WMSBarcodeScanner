@@ -10,7 +10,8 @@ namespace WMSBarcodeScanner.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        bool isBusy = false;        public bool IsBusy
+        bool isBusy = false;        
+        public bool IsBusy
         {
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
@@ -21,6 +22,14 @@ namespace WMSBarcodeScanner.ViewModels
         {
             get { return title; }
             set { SetProperty(ref title, value); }
+        }
+
+        private ContentPage page;
+
+        public ContentPage Page
+        {
+            get { return page; }
+            set { SetProperty(ref page, value); }
         }
 
         public BaseViewModel()

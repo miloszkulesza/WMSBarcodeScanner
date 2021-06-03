@@ -10,7 +10,7 @@ namespace WMSBarcodeScanner.Views
         public ReceiptPage()
         {
             InitializeComponent();
-            (BindingContext as ReceiptViewModel).Page = this;
+            (BindingContext as BaseViewModel).Page = this;
         }
     }
 }

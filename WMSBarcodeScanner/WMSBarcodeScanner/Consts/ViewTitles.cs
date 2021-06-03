@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WMSBarcodeScanner.Consts
+﻿namespace WMSBarcodeScanner.Consts
 {
     public static class ViewTitles
     {
@@ -13,5 +9,6 @@ namespace WMSBarcodeScanner.Consts
         public static readonly string ReceiptScanningPage = "Przyjęcia - skanowanie";
         public static readonly string PickScanningPage = "Pobrania - skanowanie";
         public static readonly string SearchByBarcodeScanningPage = "Szukaj - skanowanie";
+        public static readonly string LoginPage = "Logowanie";
     }
 }

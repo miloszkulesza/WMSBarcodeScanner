@@ -11,9 +11,6 @@ namespace WMSBarcodeScanner.ViewModels
     {
         private readonly IInventoryRepository inventoryRepo = DependencyService.Get<IInventoryRepository>();
         private readonly IAlertService alertService = DependencyService.Get<IAlertService>();
-
-        public Page Page { get; set; }
-
         public InventListViewModel InventListViewModel { get; set; }
 
         private Inventory inventory;
