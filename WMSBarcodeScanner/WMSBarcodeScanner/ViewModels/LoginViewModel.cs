@@ -1,25 +1,40 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using WMSBarcodeScanner.Infrastructure.Consts;
+using WMSBarcodeScanner.Infrastructure.DataAccess.Interfaces;
 using Xamarin.Forms;
 
 namespace WMSBarcodeScanner.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        #region private members
+        private readonly IUserRepository userRepository = DependencyService.Get<IUserRepository>();
+        #endregion
+
         #region properties
-        private string email;
-        public string Email
+        private string username;
+        public string Username
         {
-            get { return email; }
-            set { SetProperty(ref email, value); }
+            get { return username; }
+            set { SetProperty(ref username, value); }
         }
 
         private string password;
-        public string Passowrd
+        public string Password
         {
             get { return password; }
             set { SetProperty(ref password, value); }
         }
+
+        private bool wrongCredentials;
+
+        public bool WrongCredentials
+        {
+            get { return wrongCredentials; }
+            set { SetProperty(ref wrongCredentials, value); }
+        }
+
         #endregion
 
         #region commands
@@ -27,7 +42,7 @@ namespace WMSBarcodeScanner.ViewModels
         {
             get
             {
-                return new Command(() => OnLogin());
+                return new Command(async () => await OnLogin());
             }
         }
         #endregion
@@ -36,13 +51,23 @@ namespace WMSBarcodeScanner.ViewModels
         public LoginViewModel()
         {
             Title = ViewTitles.LoginPage;
+            WrongCredentials = false;
         }
         #endregion
 
         #region private methods
-        private void OnLogin()
+        private async Task OnLogin()
         {
-            Application.Current.MainPage = new AppShell();            
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
+                WrongCredentials = true;
+            else
+            {
+                var user = await userRepository.LoginAsync(Username, Password);
+                if (user.Id == string.Empty)
+                    WrongCredentials = true;
+                else
+                    Application.Current.MainPage = new AppShell();
+            }                     
         }
         #endregion
     }

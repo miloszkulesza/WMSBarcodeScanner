@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using WMSBarcodeScanner.Services.Interfaces;
+using WMSBarcodeScanner.Infrastructure.Services.Interfaces;
 using Xamarin.Forms;
 
 namespace WMSBarcodeScanner.ViewModels

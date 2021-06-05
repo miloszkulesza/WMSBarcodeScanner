@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace WMSBarcodeScanner.Services.Interfaces
+namespace WMSBarcodeScanner.Infrastructure.Services.Interfaces
 {
     public interface IAlertService
     {

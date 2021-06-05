@@ -1,6 +1,7 @@
-﻿using WMSBarcodeScanner.Services.DataAccess.Repositories;
-using WMSBarcodeScanner.Services.Interfaces;
-using WMSBarcodeScanner.Services.Services;
+﻿using WMSBarcodeScanner.Infrastructure.DataAccess.Interfaces;
+using WMSBarcodeScanner.Infrastructure.DataAccess.Repositories;
+using WMSBarcodeScanner.Infrastructure.Services.Interfaces;
+using WMSBarcodeScanner.Infrastructure.Services.Services;
 using WMSBarcodeScanner.Views;
 using Xamarin.Forms;
 
@@ -11,8 +12,9 @@ namespace WMSBarcodeScanner
 
         public App()
         {
-            DependencyService.Register<InventoryMockRepository>();
+            DependencyService.Register<IInventoryRepository, InventoryMockRepository>();
             DependencyService.Register<IAlertService, AlertService>();
+            DependencyService.Register<IUserRepository, UserMockRepository>();
 
             InitializeComponent();
             

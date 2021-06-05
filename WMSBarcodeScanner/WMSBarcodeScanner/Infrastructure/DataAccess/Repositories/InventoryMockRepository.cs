@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WMSBarcodeScanner.Infrastructure.DataAccess.Interfaces;
 using WMSBarcodeScanner.Models;
-using WMSBarcodeScanner.Services.DataAccess.Interfaces;
 
-namespace WMSBarcodeScanner.Services.DataAccess.Repositories
+namespace WMSBarcodeScanner.Infrastructure.DataAccess.Repositories
 {
     public class InventoryMockRepository : IInventoryRepository
     {
-        readonly List<Inventory> Inventory;
+        private readonly List<Inventory> Inventory;
 
         public InventoryMockRepository()
         {
@@ -82,7 +82,7 @@ namespace WMSBarcodeScanner.Services.DataAccess.Repositories
             return await Task.FromResult(Inventory.FirstOrDefault(arg => arg.Barcode == barcode));
         }
 
-        public async Task<IEnumerable<Inventory>> GetInventoryAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Inventory>> GetInventoryAsync()
         {
             return await Task.FromResult(Inventory);
         }

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WMSBarcodeScanner.Models;
 
-namespace WMSBarcodeScanner.Services.DataAccess.Interfaces
+namespace WMSBarcodeScanner.Infrastructure.DataAccess.Interfaces
 {
     public interface IInventoryRepository
     {
@@ -10,7 +10,7 @@ namespace WMSBarcodeScanner.Services.DataAccess.Interfaces
         Task<bool> UpdateInventoryAsync(Inventory item);
         Task<bool> DeleteInventoryAsync(string id);
         Task<Inventory> GetInventoryByIdAsync(string id);
-        Task<IEnumerable<Inventory>> GetInventoryAsync(bool forceRefresh = false);
+        Task<IEnumerable<Inventory>> GetInventoryAsync();
         Task<Inventory> GetInventoryByBarcodeAsync(string barcode);
         Task<IEnumerable<Inventory>> SearchForInventory(string searchText);
         Task<IEnumerable<Inventory>> SearchByBarcode(string barcode);

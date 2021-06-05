@@ -1,6 +1,6 @@
 ﻿using Android.OS;
 using Plugin.CurrentActivity;
-using WMSBarcodeScanner.Services.Interfaces;
+using WMSBarcodeScanner.Infrastructure.Services.Interfaces;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
