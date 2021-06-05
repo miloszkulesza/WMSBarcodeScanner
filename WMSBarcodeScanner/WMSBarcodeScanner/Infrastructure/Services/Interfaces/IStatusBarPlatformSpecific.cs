@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace WMSBarcodeScanner.Services
+namespace WMSBarcodeScanner.Services.Interfaces
 {
     public interface IStatusBarPlatformSpecific
     {

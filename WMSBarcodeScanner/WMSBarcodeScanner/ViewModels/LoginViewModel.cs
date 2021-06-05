@@ -1,6 +1,5 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Input;
-using WMSBarcodeScanner.Consts;
+﻿using System.Windows.Input;
+using WMSBarcodeScanner.Infrastructure.Consts;
 using Xamarin.Forms;
 
 namespace WMSBarcodeScanner.ViewModels

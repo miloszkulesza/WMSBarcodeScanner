@@ -1,12 +1,12 @@
 ﻿using Android.OS;
 using Plugin.CurrentActivity;
-using WMSBarcodeScanner.Services;
+using WMSBarcodeScanner.Services.Interfaces;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(WMSBarcodeScanner.Droid.CustomRenderers.Statusbar))]
 namespace WMSBarcodeScanner.Droid.CustomRenderers
-{    
+{
     public class Statusbar : IStatusBarPlatformSpecific
     {        
         public void SetStatusBarColor(System.Drawing.Color color)

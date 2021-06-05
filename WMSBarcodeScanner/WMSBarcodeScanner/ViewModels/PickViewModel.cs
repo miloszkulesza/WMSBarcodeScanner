@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using WMSBarcodeScanner.Consts;
+using WMSBarcodeScanner.Infrastructure.Consts;
 using WMSBarcodeScanner.Views;
 using Xamarin.Forms;
 using ZXing;

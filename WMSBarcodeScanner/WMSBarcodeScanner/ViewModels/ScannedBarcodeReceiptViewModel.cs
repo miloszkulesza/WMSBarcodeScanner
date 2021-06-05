@@ -1,5 +1,4 @@
-﻿using WMSBarcodeScanner.Consts;
-using Xamarin.Forms;
+﻿using WMSBarcodeScanner.Infrastructure.Consts;
 
 namespace WMSBarcodeScanner.ViewModels
 {

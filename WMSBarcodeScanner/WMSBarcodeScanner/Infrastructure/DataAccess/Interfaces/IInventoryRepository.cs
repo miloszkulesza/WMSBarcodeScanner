@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WMSBarcodeScanner.Models;
 
-namespace WMSBarcodeScanner.Services
+namespace WMSBarcodeScanner.Services.DataAccess.Interfaces
 {
     public interface IInventoryRepository
     {

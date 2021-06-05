@@ -1,4 +1,4 @@
-﻿namespace WMSBarcodeScanner.Consts
+﻿namespace WMSBarcodeScanner.Infrastructure.Consts
 {
     public static class ViewTitles
     {

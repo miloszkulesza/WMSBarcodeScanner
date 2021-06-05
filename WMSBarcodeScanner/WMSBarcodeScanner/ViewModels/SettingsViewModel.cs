@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WMSBarcodeScanner.Consts;
+﻿using WMSBarcodeScanner.Infrastructure.Consts;
 
 namespace WMSBarcodeScanner.ViewModels
 {

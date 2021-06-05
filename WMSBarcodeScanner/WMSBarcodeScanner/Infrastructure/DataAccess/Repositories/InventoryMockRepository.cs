@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WMSBarcodeScanner.Models;
+using WMSBarcodeScanner.Services.DataAccess.Interfaces;
 
-namespace WMSBarcodeScanner.Services
+namespace WMSBarcodeScanner.Services.DataAccess.Repositories
 {
     public class InventoryMockRepository : IInventoryRepository
     {

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WMSBarcodeScanner.Consts;
+using WMSBarcodeScanner.Infrastructure.Consts;
 using WMSBarcodeScanner.Models;
-using WMSBarcodeScanner.Services;
+using WMSBarcodeScanner.Services.DataAccess.Interfaces;
+using WMSBarcodeScanner.Services.Interfaces;
 using WMSBarcodeScanner.Views;
 using Xamarin.Forms;
 using ZXing;

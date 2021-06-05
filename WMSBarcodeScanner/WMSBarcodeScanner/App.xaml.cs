@@ -1,4 +1,6 @@
-﻿using WMSBarcodeScanner.Services;
+﻿using WMSBarcodeScanner.Services.DataAccess.Repositories;
+using WMSBarcodeScanner.Services.Interfaces;
+using WMSBarcodeScanner.Services.Services;
 using WMSBarcodeScanner.Views;
 using Xamarin.Forms;
 
