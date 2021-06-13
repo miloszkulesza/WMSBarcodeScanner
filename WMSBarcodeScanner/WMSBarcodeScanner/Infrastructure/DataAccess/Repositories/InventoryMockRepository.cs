@@ -26,7 +26,7 @@ namespace WMSBarcodeScanner.Infrastructure.DataAccess.Repositories
                     Quantity = 1,
                     Manufacturer = "TEGE Pharma B.V.",
                     Barcode = "5901549084108",
-                    PackageUnit = InventoryUnit.Pcs 
+                    PackageUnit = InventoryUnit.Grames 
                 },
                 new Inventory 
                 { 

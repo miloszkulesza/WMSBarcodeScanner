@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WMSBarcodeScanner.Views.InventEditPage"
              xmlns:vm="clr-namespace:WMSBarcodeScanner.ViewModels"
+             xmlns:models="clr-namespace:WMSBarcodeScanner.Models"
+             xmlns:extensions="clr-namespace:WMSBarcodeScanner.Infrastructure.Extensions"
              Title="{Binding Title}">
     
     <ContentPage.BindingContext>
@@ -109,10 +111,13 @@
                     Grid.Column="0"
                     Text="Jednostka"
                     VerticalOptions="Center" />
-            <Editor Grid.Row="5"
-                    Grid.Column="1"
-                    Text="{Binding Inventory.PackageUnit}"
-                    VerticalOptions="Center" />
+
+            <extensions:EnumPicker Grid.Row="5"
+                                    Grid.Column="1"
+                                    x:TypeArguments="models:InventoryUnit"
+                                    SelectedItem="{Binding Inventory.PackageUnit, Mode=TwoWay}"
+                                    VerticalOptions="Center"
+                                    Margin="5"/> 
         </Grid>
     </ContentPage.Content>
 </ContentPage>

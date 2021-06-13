@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WMSBarcodeScanner.Views.InventDetailsPage"
-             xmlns:vm="clr-namespace:WMSBarcodeScanner.ViewModels"
+             xmlns:vm="clr-namespace:WMSBarcodeScanner.ViewModels"             
+             xmlns:extensions="clr-namespace:WMSBarcodeScanner.Infrastructure.Extensions"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:InventDetailsViewModel />
@@ -72,7 +73,7 @@
                        Text="{Binding Inventory.Quantity}"
                        Style="{StaticResource ValueLabel}" />
                 <Label Grid.Row="4" 
-                       Text="{Binding Inventory.PackageUnit}"
+                       Text="{Binding Inventory.PackageUnit, Converter={extensions:InventoryUnitConverter}}"
                        Style="{StaticResource ValueLabel}" />
             </Grid>
         </Grid>

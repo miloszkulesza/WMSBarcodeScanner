@@ -11,7 +11,6 @@ using Xamarin.Forms;
 using ZXing;
 using ZXing.Net.Mobile.Forms;
 using WMSBarcodeScanner.Infrastructure.Events;
-using System;
 
 namespace WMSBarcodeScanner.ViewModels
 {
