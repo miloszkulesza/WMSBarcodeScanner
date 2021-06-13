@@ -5,39 +5,56 @@ using WMSBarcodeScanner.Models;
 using WMSBarcodeScanner.Infrastructure.DataAccess.Interfaces;
 using WMSBarcodeScanner.Infrastructure.Services.Interfaces;
 using Xamarin.Forms;
+using WMSBarcodeScanner.Infrastructure.Consts;
 
 namespace WMSBarcodeScanner.ViewModels
 {
     public class InventEditViewModel : BaseViewModel
     {
+        #region private members
         private readonly IInventoryRepository inventoryRepo = DependencyService.Get<IInventoryRepository>();
         private readonly IAlertService alertService = DependencyService.Get<IAlertService>();
-        public InventListViewModel InventListViewModel { get; set; }
+        #endregion
+
+        #region properties
+        public BaseViewModel ViewModel { get; set; }
 
         private Inventory inventory;
         public Inventory Inventory
         {
             get { return inventory; }
-            set 
-            { 
-                SetProperty(ref inventory, value);
-                Title = inventory.Name;
-            }
+            set { SetProperty(ref inventory, value); }
         }
 
-        public ICommand SaveInventoryCommand => new Command(async () => await OnSaveInventory());
+        private bool newInventory;
+        public bool NewInventory
+        {
+            get { return newInventory; }
+            set { SetProperty(ref newInventory, value); }
+        }
+        #endregion
 
+        #region command
+        public ICommand SaveInventoryCommand => new Command(async () => await OnSaveInventory());
+        #endregion
+
+        #region ctor
         public InventEditViewModel()
         {
-            
-        }
 
+        }
+        #endregion
+
+        #region private methods
         private async Task OnSaveInventory()
         {
             bool result = false;
             try
             {
-                result = await inventoryRepo.UpdateInventoryAsync(Inventory);
+                if(NewInventory)
+                    result = await inventoryRepo.AddInventoryAsync(Inventory);
+                else
+                    result = await inventoryRepo.UpdateInventoryAsync(Inventory);
             }
             catch(Exception e)
             {
@@ -46,8 +63,21 @@ namespace WMSBarcodeScanner.ViewModels
 
             await Page.Navigation.PopAsync();
             
-            if(result)
-                InventListViewModel.RefreshListCommand.Execute(null);
+            if(result && ViewModel is InventListViewModel)
+                (ViewModel as InventListViewModel).RefreshListCommand.Execute(null);   
+            else if(NewInventory)
+                await alertService.ShowAsync("Dodano nowy towar", $"Dodano nowy towar: {Inventory.Name}", "OK");
         }
+        #endregion
+
+        #region public methods
+        public void SetPageTitle()
+        {
+            if (NewInventory)
+                Title = $"{ViewTitles.InventAddPage} - {Inventory.Barcode}";
+            else
+                Title = $"{ViewTitles.InventEditPage} - {Inventory.Barcode}";
+        }
+        #endregion
     }
 }

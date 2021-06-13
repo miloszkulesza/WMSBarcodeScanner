@@ -39,8 +39,7 @@ namespace WMSBarcodeScanner.ViewModels
         public PickViewModel()
         {
             IsScanning = true;            
-            Title = ViewTitles.PickScanningPage;
-            Page.Appearing += OnPageAppearing;
+            Title = ViewTitles.PickScanningPage;            
             QRScanResultCommand = new Command(() => OnQRScanResult());
         }
         #endregion
@@ -59,6 +58,13 @@ namespace WMSBarcodeScanner.ViewModels
             {
                 await Page.Navigation.PushAsync(new ScannedBarcodePickPage(ScannedBarcode.Text));
             });
+        }
+        #endregion
+
+        #region public methods
+        public void SetPageApeearingEvent()
+        {
+            Page.Appearing += OnPageAppearing;
         }
         #endregion
     }

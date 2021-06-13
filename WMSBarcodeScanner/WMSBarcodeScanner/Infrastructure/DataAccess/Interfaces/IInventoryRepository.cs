@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using WMSBarcodeScanner.Infrastructure.Events;
 using WMSBarcodeScanner.Models;
 
 namespace WMSBarcodeScanner.Infrastructure.DataAccess.Interfaces
@@ -14,5 +16,6 @@ namespace WMSBarcodeScanner.Infrastructure.DataAccess.Interfaces
         Task<Inventory> GetInventoryByBarcodeAsync(string barcode);
         Task<IEnumerable<Inventory>> SearchForInventory(string searchText);
         Task<IEnumerable<Inventory>> SearchByBarcode(string barcode);
+        event EventHandler<InventoryAddEventArgs> InventoryAdd;
     }
 }

@@ -10,6 +10,8 @@ using WMSBarcodeScanner.Views;
 using Xamarin.Forms;
 using ZXing;
 using ZXing.Net.Mobile.Forms;
+using WMSBarcodeScanner.Infrastructure.Events;
+using System;
 
 namespace WMSBarcodeScanner.ViewModels
 {
@@ -65,8 +67,10 @@ namespace WMSBarcodeScanner.ViewModels
             get { return scannerPage; }
             set { SetProperty(ref scannerPage, value); }
         }
+        #endregion
 
-
+        #region event delegates
+        
         #endregion
 
         #region commands
@@ -98,7 +102,7 @@ namespace WMSBarcodeScanner.ViewModels
         {
             get
             {
-                return new Command(async () => await OnResetList());
+                return new Command(async () => await OnRefreshList());
             }
         }
         #endregion
@@ -109,6 +113,7 @@ namespace WMSBarcodeScanner.ViewModels
             Title = ViewTitles.InventListPage;
             InventoryList = new ObservableCollection<Inventory>(inventoryRepo.GetInventoryAsync().Result);
             ResetList = false;
+            RegisterEvents();
         }
         #endregion
 
@@ -180,10 +185,22 @@ namespace WMSBarcodeScanner.ViewModels
             });
         }
 
-        private async Task OnResetList()
+        private async Task OnRefreshList()
         {
             InventoryList = new ObservableCollection<Inventory>(await inventoryRepo.GetInventoryAsync());
             ResetList = false;
+        }
+
+        private void RegisterEvents()
+        {
+            inventoryRepo.InventoryAdd += InventoryAddEventHandler;
+        }
+        #endregion
+
+        #region event handlers
+        private void InventoryAddEventHandler(object sender, InventoryAddEventArgs args)
+        {
+            InventoryList.Add(args.Inventory);
         }
         #endregion
     }

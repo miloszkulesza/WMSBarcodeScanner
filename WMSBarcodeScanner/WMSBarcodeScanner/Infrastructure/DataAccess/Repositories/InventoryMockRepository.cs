@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WMSBarcodeScanner.Infrastructure.DataAccess.Interfaces;
+using WMSBarcodeScanner.Infrastructure.Events;
 using WMSBarcodeScanner.Models;
 
 namespace WMSBarcodeScanner.Infrastructure.DataAccess.Repositories
@@ -10,6 +11,8 @@ namespace WMSBarcodeScanner.Infrastructure.DataAccess.Repositories
     public class InventoryMockRepository : IInventoryRepository
     {
         private readonly List<Inventory> Inventory;
+
+        public event EventHandler<InventoryAddEventArgs> InventoryAdd;
 
         public InventoryMockRepository()
         {
@@ -51,7 +54,7 @@ namespace WMSBarcodeScanner.Infrastructure.DataAccess.Repositories
         public async Task<bool> AddInventoryAsync(Inventory inventory)
         {
             Inventory.Add(inventory);
-
+            InventoryAdd.Invoke(this, new InventoryAddEventArgs() { Inventory = inventory });
             return await Task.FromResult(true);
         }
 

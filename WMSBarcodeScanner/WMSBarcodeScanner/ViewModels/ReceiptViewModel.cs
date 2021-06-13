@@ -1,5 +1,9 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using WMSBarcodeScanner.Infrastructure.Consts;
+using WMSBarcodeScanner.Infrastructure.DataAccess.Interfaces;
+using WMSBarcodeScanner.Infrastructure.Services.Interfaces;
+using WMSBarcodeScanner.Models;
 using WMSBarcodeScanner.Views;
 using Xamarin.Forms;
 using ZXing;
@@ -8,6 +12,11 @@ namespace WMSBarcodeScanner.ViewModels
 {
     public class ReceiptViewModel : BaseViewModel
     {
+        #region private members
+        private readonly IInventoryRepository inventRepo = DependencyService.Get<IInventoryRepository>();
+        private readonly IAlertService alertService = DependencyService.Get<IAlertService>();
+        #endregion
+
         #region properties
         private Result scannedBarcode;
         public Result ScannedBarcode
@@ -36,7 +45,7 @@ namespace WMSBarcodeScanner.ViewModels
         {
             get
             {
-                return new Command(() => OnQRScanResult());
+                return new Command(async () => await OnQRScanResult());
             }
         }
         #endregion
@@ -44,9 +53,8 @@ namespace WMSBarcodeScanner.ViewModels
         #region construct
         public ReceiptViewModel()
         {
-            IsScanning = true;            
-            Title = ViewTitles.ReceiptScanningPage;
-            Page.Appearing += OnPageAppearing;
+            IsScanning = true;
+            Title = ViewTitles.ReceiptScanningPage;            
         }
         #endregion
 
@@ -56,14 +64,38 @@ namespace WMSBarcodeScanner.ViewModels
             IsAnalyzing = true;
         }
 
-        private void OnQRScanResult()
+        private async Task OnQRScanResult()
         {
             IsAnalyzing = false;
-
-            Device.BeginInvokeOnMainThread(async () =>
+            Inventory inventory;
+            
+            inventory = await inventRepo.GetInventoryByBarcodeAsync(ScannedBarcode.Text);
+            if (inventory == null)
             {
-                await Page.Navigation.PushAsync(new ScannedBarcodeReceiptPage(ScannedBarcode.Text));
-            });
+                inventory = new Inventory
+                {
+                    Barcode = ScannedBarcode.Text,
+                    Quantity = 1
+                };
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await Page.Navigation.PushAsync(new InventEditPage(inventory, this, true));
+                });
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await alertService.ShowAsync("Nowy towar", $"To będzie dialog dodawania ilości towaru {ScannedBarcode.Text}", "OK");
+                });
+            }
+        }
+        #endregion
+
+        #region public methods
+        public void SetPageAppearingEvent()
+        {
+            Page.Appearing += OnPageAppearing;
         }
         #endregion
     }
