@@ -52,12 +52,16 @@ namespace WMSBarcodeScanner.ViewModels
         {
             Title = ViewTitles.LoginPage;
             WrongCredentials = false;
+            Username = "mkulesza";
+            Password = "admin";
         }
         #endregion
 
         #region private methods
         private async Task OnLogin()
         {
+            IsBusy = true;
+            await Task.Delay(2000);
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
                 WrongCredentials = true;
             else
@@ -67,7 +71,8 @@ namespace WMSBarcodeScanner.ViewModels
                     WrongCredentials = true;
                 else
                     Application.Current.MainPage = new AppShell();
-            }                     
+            }
+            IsBusy = false;
         }
         #endregion
     }

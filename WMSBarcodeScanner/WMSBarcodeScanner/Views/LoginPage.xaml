@@ -36,30 +36,46 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Logowanie" />
-            <Label Text="Nieprawidłowa nazwa użytkownika lub hasło"
-                   Style="{x:StaticResource wrongCredentials}">
-                <Label.Triggers>
-                    <DataTrigger TargetType="{x:Type Label}"
-                                 Binding="{Binding WrongCredentials}"
-                                 Value="True">
-                        <Setter Property="IsVisible" Value="True" />
-                    </DataTrigger>
-                    <DataTrigger TargetType="{x:Type Label}"
-                                 Binding="{Binding WrongCredentials}"
-                                 Value="False">
-                        <Setter Property="IsVisible" Value="False" />
-                    </DataTrigger>
-                </Label.Triggers>
-            </Label>
-            <Entry Placeholder="Nazwa użytkownika"
-                   Text="{Binding Username}" />
-            <Entry Placeholder="Hasło"
-                   Text="{Binding Password}"
-                   IsPassword="True" />
-            <Button Text="Zaloguj się"
-                    Command="{Binding LoginCommand}" />
-        </StackLayout>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All">
+                <Label Text="Logowanie" />
+                <Label Text="Nieprawidłowa nazwa użytkownika lub hasło"
+                       Style="{x:StaticResource wrongCredentials}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="{x:Type Label}"
+                                     Binding="{Binding WrongCredentials}"
+                                     Value="True">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="{x:Type Label}"
+                                     Binding="{Binding WrongCredentials}"
+                                     Value="False">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Entry Placeholder="Nazwa użytkownika"
+                       Text="{Binding Username}" />
+                <Entry Placeholder="Hasło"
+                       Text="{Binding Password}"
+                       IsPassword="True" />
+                <Button Text="Zaloguj się"
+                        Command="{Binding LoginCommand}" />
+            </StackLayout>
+            <StackLayout IsVisible="{Binding IsBusy}"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All"
+                         BackgroundColor="Gray" Opacity="0.7">
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="EndAndExpand"
+                                   Color="Red"/>
+                <Label Text="Ładowanie..."
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="StartAndExpand"
+                       TextColor="Red"/>
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
