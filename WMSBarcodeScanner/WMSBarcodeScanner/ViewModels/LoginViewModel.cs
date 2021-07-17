@@ -61,7 +61,6 @@ namespace WMSBarcodeScanner.ViewModels
         private async Task OnLogin()
         {
             IsBusy = true;
-            await Task.Delay(2000);
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
                 WrongCredentials = true;
             else
