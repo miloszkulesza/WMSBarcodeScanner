@@ -13,6 +13,7 @@ namespace WMSBarcodeScanner.Infrastructure.DataAccess.Repositories
         private readonly List<Inventory> Inventory;
 
         public event EventHandler<InventoryAddEventArgs> InventoryAdd;
+        public event EventHandler<InventoryDeleteEventArgs> InventoryDelete;
 
         public InventoryMockRepository()
         {
@@ -55,6 +56,7 @@ namespace WMSBarcodeScanner.Infrastructure.DataAccess.Repositories
         {
             Inventory.Add(inventory);
             InventoryAdd.Invoke(this, new InventoryAddEventArgs() { Inventory = inventory });
+
             return await Task.FromResult(true);
         }
 
@@ -71,6 +73,7 @@ namespace WMSBarcodeScanner.Infrastructure.DataAccess.Repositories
         {
             var oldInventory = Inventory.Where((arg) => arg.Id == id).FirstOrDefault();
             Inventory.Remove(oldInventory);
+            InventoryDelete.Invoke(this, new InventoryDeleteEventArgs() { Inventory = oldInventory });
 
             return await Task.FromResult(true);
         }

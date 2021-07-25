@@ -17,5 +17,6 @@ namespace WMSBarcodeScanner.Infrastructure.DataAccess.Interfaces
         Task<IEnumerable<Inventory>> SearchForInventory(string searchText);
         Task<IEnumerable<Inventory>> SearchByBarcode(string barcode);
         event EventHandler<InventoryAddEventArgs> InventoryAdd;
+        event EventHandler<InventoryDeleteEventArgs> InventoryDelete;
     }
 }

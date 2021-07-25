@@ -68,10 +68,6 @@ namespace WMSBarcodeScanner.ViewModels
         }
         #endregion
 
-        #region event delegates
-        
-        #endregion
-
         #region commands
         public ICommand EditInventoryCommand
         {
@@ -193,6 +189,7 @@ namespace WMSBarcodeScanner.ViewModels
         private void RegisterEvents()
         {
             inventoryRepo.InventoryAdd += InventoryAddEventHandler;
+            inventoryRepo.InventoryDelete += InventoryDeleteEventHandler;
         }
         #endregion
 
@@ -200,6 +197,11 @@ namespace WMSBarcodeScanner.ViewModels
         private void InventoryAddEventHandler(object sender, InventoryAddEventArgs args)
         {
             InventoryList.Add(args.Inventory);
+        }
+
+        private void InventoryDeleteEventHandler(object sender, InventoryDeleteEventArgs args)
+        {
+            InventoryList.Remove(args.Inventory);
         }
         #endregion
     }

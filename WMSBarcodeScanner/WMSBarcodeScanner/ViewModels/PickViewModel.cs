@@ -71,7 +71,7 @@ namespace WMSBarcodeScanner.ViewModels
                 UserDialogs.Instance.Toast($"Nie odnaleziono towaru o kodzie kreskowym {ScannedBarcode.Text}");
             else
             {
-                PromptResult result = await UserDialogs.Instance.PromptAsync("Podaj ilość towaru do przyjęcia", "Przyjęcie towaru", "Przyjmij", "Anuluj", "Ilość", InputType.Number);
+                PromptResult result = await UserDialogs.Instance.PromptAsync("Podaj ilość towaru do wydania", "Wydanie towaru", "Wydaj", "Anuluj", "Ilość", InputType.Number);
                 if (result.Ok)
                 {
                     int quantity = Convert.ToInt32(result.Value);
