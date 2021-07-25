@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using WMSBarcodeScanner.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace WMSBarcodeScanner.Views
@@ -9,6 +10,11 @@ namespace WMSBarcodeScanner.Views
         public SettingsPage()
         {
             InitializeComponent();
+        }
+
+        private void ToolbarItem_Clicked(object sender, System.EventArgs e)
+        {
+            (this.BindingContext as SettingsViewModel).SaveCommmand.Execute(string.Empty);
         }
     }
 }

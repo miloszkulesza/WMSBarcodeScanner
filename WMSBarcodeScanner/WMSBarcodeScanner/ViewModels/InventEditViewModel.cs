@@ -58,7 +58,7 @@ namespace WMSBarcodeScanner.ViewModels
             }
             catch(Exception e)
             {
-                await alertService.ShowAsync("Błąd", $"W trakcie zapisu towaru wystąpił błąd. Szczegóły:{e.InnerException.Message}", "Zamknij");
+                alertService.Show("Błąd", $"W trakcie zapisu towaru wystąpił błąd. Szczegóły:{e.InnerException.Message}", "Zamknij");
             }
 
             await Page.Navigation.PopAsync();
@@ -66,7 +66,7 @@ namespace WMSBarcodeScanner.ViewModels
             if(result && ViewModel is InventListViewModel)
                 (ViewModel as InventListViewModel).RefreshListCommand.Execute(null);   
             else if(NewInventory)
-                await alertService.ShowAsync("Dodano nowy towar", $"Dodano nowy towar: {Inventory.Name}", "OK");
+                alertService.Show("Dodano nowy towar", $"Dodano nowy towar: {Inventory.Name}", "OK");
         }
         #endregion
 

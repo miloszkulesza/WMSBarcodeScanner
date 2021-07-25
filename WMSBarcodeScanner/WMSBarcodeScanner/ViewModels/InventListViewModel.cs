@@ -36,7 +36,7 @@ namespace WMSBarcodeScanner.ViewModels
             set
             { 
                 SetProperty(ref searchText, value);
-                OnSearchChanged();
+                Task task = OnSearchChanged();
             }
         }
 
@@ -47,7 +47,7 @@ namespace WMSBarcodeScanner.ViewModels
             set
             {
                 SetProperty(ref selectedItem, value);
-                OnSelectedItemChanged();
+                Task task = OnSelectedItemChanged();
             }
         }
 
@@ -147,7 +147,7 @@ namespace WMSBarcodeScanner.ViewModels
             {
                 await inventoryRepo.DeleteInventoryAsync((param as Inventory).Id);
                 InventoryList.Remove(InventoryList.FirstOrDefault(x => x.Id == (param as Inventory).Id));
-                await alertService.ShowAsync("Usuwanie towaru", $"Usunięto towar {(param as Inventory).Name}", "Zamknij");
+                alertService.Show("Usuwanie towaru", $"Usunięto towar {(param as Inventory).Name}", "Zamknij");
             }
         }
 
@@ -175,7 +175,7 @@ namespace WMSBarcodeScanner.ViewModels
                 await Page.Navigation.PopAsync();
                 var searchedInventory = await inventoryRepo.SearchByBarcode(result.Text);
                 if (searchedInventory.Count() == 0)
-                    await alertService.ShowAsync("Nie znaleziono towaru", $"Nie znaleziono zeskanowanego towaru o kodzie kreskowym {result.Text}", "Zamknij");
+                    alertService.Show("Nie znaleziono towaru", $"Nie znaleziono zeskanowanego towaru o kodzie kreskowym {result.Text}", "Zamknij");
                 else
                 {
                     InventoryList = new ObservableCollection<Inventory>(searchedInventory);
